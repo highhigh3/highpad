@@ -14,11 +14,15 @@ class Note(db.Model):
         db.ForeignKey(add_prefix_for_prod("notebooks.id")),
         nullable=False
     )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod("users.id")),
+        nullable=False)
     title = db.Column(db.String(255), nullable=False)
     content = db.Column(db.Text, nullable=True)
-    created_at = db.Column(db.TIMESTAMP, default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.TIMESTAMP, default=datetime.datetime.utcnow, 
-                           onupdate=datetime.datetime.utcnow)
+    created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
+    updated_at = db.Column(db.TIMESTAMP, default=datetime.utcnow, 
+                           onupdate=datetime.utcnow)
 
     # one-to-many relationships
     user = db.relationship("User", back_populates="notes")
@@ -28,6 +32,7 @@ class Note(db.Model):
         return {
             "id": self.id,
             "notebook_id": self.notebook_id,
+            "user_id": self.user_id,
             "title": self.title,
             "content": self.content
         }

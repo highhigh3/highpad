@@ -17,7 +17,7 @@ class Notebook(db.Model):
     updated_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)    
 
     # one-to-many relationships
-    user = db.relationship("User", back_populates="products")
+    user = db.relationship("User", back_populates="notebooks")
     notes = db.relationship("Note", back_populates="notebook", cascade="all, delete-orphan")
 
     def to_dict(self):

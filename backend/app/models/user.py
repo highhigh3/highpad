@@ -15,6 +15,11 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
 
+    # one-to-many relationship
+    notebooks = db.relationship("Notebook", back_populates="user", cascade="all, delete-orphan")
+    notes = db.relationship("Note", back_populates="user", cascade="all, delete-orphan")
+
+
     @property
     def password(self):
         return self.hashed_password
@@ -27,4 +32,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        return {"id": self.id, "username": self.username, "email": self.email}
+        return {"id": self.id, 
+                "username": self.username, 
+                "email": self.email
+            }
