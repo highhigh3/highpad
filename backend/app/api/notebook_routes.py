@@ -7,8 +7,10 @@ notebook_routes = Blueprint('notebooks', __name__)
 
 # Get All Notebooks Route
 @notebook_routes.route('/')
+@login_required
 def get_all_notebooks():
-    pass
+    notebooks = Notebook.query.filter_by(user_id=current_user.id).all()
+    return [notebook.to_dict() for notebook in notebooks]
 
 
 # Create a Notebook Route

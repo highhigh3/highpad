@@ -16,7 +16,7 @@ class Notebook(db.Model):
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     updated_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)    
 
-    # one-to-many relationships
+    # one-to-many relationship
     user = db.relationship("User", back_populates="notebooks")
     notes = db.relationship("Note", back_populates="notebook", cascade="all, delete-orphan")
 

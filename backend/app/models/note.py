@@ -24,7 +24,7 @@ class Note(db.Model):
     updated_at = db.Column(db.TIMESTAMP, default=datetime.utcnow, 
                            onupdate=datetime.utcnow)
 
-    # one-to-many relationships
+    # one-to-many relationship
     user = db.relationship("User", back_populates="notes")
     notebook = db.relationship("Notebook", back_populates="notes")
 
