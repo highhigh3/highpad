@@ -22,3 +22,7 @@ export interface INotebookAction {
     type: string;
     payload: any;
 }
+
+export interface ICreateNotebook {
+    title: string;
+}
