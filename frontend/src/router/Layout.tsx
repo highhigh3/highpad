@@ -13,12 +13,18 @@ export default function Layout():JSX.Element {
   }, [dispatch]);
 
   return (
-    <>
+
       <ModalProvider>
+      <div className="nav-wrapper"> 
+      <div className="nav-container-left">
         <Navigation />
+      </div>
+      <main className="main-container">
         {isLoaded && <Outlet />}
+      </main> 
+      </div>   
         <Modal />
       </ModalProvider>
-    </>
+
   );
 }

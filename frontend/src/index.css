@@ -1,1 +1,25 @@
 /* TODO: Add sitewide styles */
+body, html, :root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.nav-container-left {
+  width: 200px;
+  display: flex;
+  height: 100vh;
+  border: 2px solid blue;
+}
+
+.main-container {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 2px solid rgb(255, 0, 0);
+}
+
+.nav-wrapper {
+  display: flex;
+  height: 100vh;
+}

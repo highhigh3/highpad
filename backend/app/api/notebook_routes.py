@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import db, Notebook, User
-# from app.forms import 
+from app.forms import NotebookForm
 
 notebook_routes = Blueprint('notebooks', __name__)
 
@@ -17,7 +17,20 @@ def get_all_notebooks():
 @notebook_routes.route('/create', methods=['POST'])
 @login_required
 def create_notebook():
-    pass
+
+    form = NotebookForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        notebook = Notebook(
+            title=form.data["title"],
+            user_id=current_user.id
+        )
+        db.session.add(notebook)
+        db.session.commit()
+        return notebook.to_dict(), 201
+
+    return form.errors, 400
 
 
 # Update a Notebook Route

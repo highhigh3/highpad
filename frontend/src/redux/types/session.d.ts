@@ -4,6 +4,7 @@ export interface SessionInitialState {
 }
 
 export interface IUser {
+    username: ReactNode;
     id: number;
     email: string;
 }

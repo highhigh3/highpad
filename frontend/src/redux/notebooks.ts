@@ -1,11 +1,12 @@
 // ------- Imports -------
 
-import { INotebook, INotebookState, INotebookAction } from "./types/notebooks";
+import { INotebook, INotebookState, INotebookAction, ICreateNotebook } from "./types/notebooks";
 
 
 // ------- Action Types -------
 
 const GET_ALL_NOTEBOOKS = 'notebooks/GET_ALL_NOTEBOOKS';
+const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK'
 
 
 // ------- Action Creators -------
@@ -13,6 +14,11 @@ const GET_ALL_NOTEBOOKS = 'notebooks/GET_ALL_NOTEBOOKS';
 const getAllNotebooks = (notebooks: INotebook[]) => ({
     type: GET_ALL_NOTEBOOKS,
     payload: notebooks
+})
+
+const createNotebook = (notebook: INotebook[]) => ({
+    type: CREATE_NOTEBOOK,
+    payload: notebook
 })
 
 
@@ -38,6 +44,27 @@ export const getAllNotebooksThunk = (): any => async (dispatch: any) => {
 };
 
 
+export const createNotebookThunk = (notebook: ICreateNotebook): any => async (dispatch: any) => {
+  try {
+    const response = await fetch("/api/notebooks/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(notebook)
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(createNotebook(data));
+    } else {
+      throw response;
+    }
+  } catch (e) {
+    const err = e as Response;
+    return await err.json();
+  }
+};
+
+
 // ------- Normalizing State -------
 
 const initialState: INotebookState = {
@@ -59,6 +86,11 @@ function notebooksReducer(state = initialState, action: INotebookAction) {
             newState.allNotebooks = notebooks;
             return newState;
 
+        case CREATE_NOTEBOOK:
+            newState = { ...state };
+            newState.allNotebooks = [...newState.allNotebooks, action.payload];
+            newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
+            return newState;
 
 
 

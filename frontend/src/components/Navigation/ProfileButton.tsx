@@ -6,9 +6,12 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useAppSelector } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
+
 
 function ProfileButton():JSX.Element {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const user = useAppSelector((store) => store.session.user);
   const ulRef = useRef<any>();
@@ -40,6 +43,10 @@ function ProfileButton():JSX.Element {
     closeMenu();
   };
 
+  const createNotebook = () => {
+    navigate('/notebooks/create');
+  };
+
   return (
     <>
       <button onClick={(e) => toggleMenu(e)}>
@@ -51,6 +58,11 @@ function ProfileButton():JSX.Element {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+
+                <button onClick={createNotebook}>
+                  Create Notebook
+                </button>
+
               <li>
                 <button onClick={(e) => logout(e)}>Log Out</button>
               </li>
