@@ -4,6 +4,7 @@ import "./Navigation.css";
 
 function Navigation():JSX.Element {
   return (
+    <nav className="navigation">
     <ul>
       <li>
         <NavLink to="/">Home</NavLink>
@@ -13,6 +14,7 @@ function Navigation():JSX.Element {
         <ProfileButton />
       </li>
     </ul>
+    </nav> 
   );
 }
 
