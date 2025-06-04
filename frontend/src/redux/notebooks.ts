@@ -6,7 +6,8 @@ import { INotebook, INotebookState, INotebookAction, ICreateNotebook } from "./t
 // ------- Action Types -------
 
 const GET_ALL_NOTEBOOKS = 'notebooks/GET_ALL_NOTEBOOKS';
-const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK'
+const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK';
+const UPDATE_NOTEBOOK = 'notebooks/UPDATE_NOTEBOOK';
 
 
 // ------- Action Creators -------
@@ -14,17 +15,22 @@ const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK'
 const getAllNotebooks = (notebooks: INotebook[]) => ({
     type: GET_ALL_NOTEBOOKS,
     payload: notebooks
-})
+});
 
 const createNotebook = (notebook: INotebook[]) => ({
     type: CREATE_NOTEBOOK,
+    payload: notebook
+});
+
+const updateNotebook = (notebook: INotebook) => ({
+    type: UPDATE_NOTEBOOK,
     payload: notebook
 })
 
 
 // ------- Thunks -------
 
-export const getAllNotebooksThunk = (): any => async (dispatch: any) => {
+export const getAllNotebooksThunk = (notebookId: number): any => async (dispatch: any) => {
     try {
         const res = await fetch('/api/notebooks');
         if (res.ok) {
@@ -65,6 +71,27 @@ export const createNotebookThunk = (notebook: ICreateNotebook): any => async (di
 };
 
 
+export const updateNotebookThunk = (notebookId: number, notebook: INotebook): any => async (dispatch: any) => {
+  try {
+    const response = await fetch(`/api/notebooks/${notebookId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(notebook)
+    });
+
+    if (response.ok) {
+      const data: INotebook = await response.json();
+      dispatch(updateNotebook(data));
+    } else {
+      throw response;
+    }
+  } catch (e) {
+    const err = e as Response;
+    return await err.json();
+  }
+};
+
+
 // ------- Normalizing State -------
 
 const initialState: INotebookState = {
@@ -83,10 +110,21 @@ function notebooksReducer(state = initialState, action: INotebookAction) {
         case GET_ALL_NOTEBOOKS:
             const notebooks = action.payload;
             newState = { ...state };
+            let newByIdGetAllNotebooks: { [id: number]: INotebook } = {};
+            for (let notebook of notebooks) {
+                newByIdGetAllNotebooks[notebook.id!] = notebook;
+            }
+            newState.byId = newByIdGetAllNotebooks;
             newState.allNotebooks = notebooks;
             return newState;
 
         case CREATE_NOTEBOOK:
+            newState = { ...state };
+            newState.allNotebooks = [...newState.allNotebooks, action.payload];
+            newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
+            return newState;
+
+        case UPDATE_NOTEBOOK:
             newState = { ...state };
             newState.allNotebooks = [...newState.allNotebooks, action.payload];
             newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
