@@ -4,8 +4,8 @@
 // ------- General Types -------
 
 export interface INotebook {
-    id: number;
-    user_id: number;
+    id?: number;
+    user_id?: number;
     title: string;
     created_at?: string;
     updated_at?: string;
@@ -24,5 +24,5 @@ export interface INotebookAction {
 }
 
 export interface ICreateNotebook {
-    title: string;
+    title: string
 }
