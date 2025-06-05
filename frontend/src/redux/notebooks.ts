@@ -1,6 +1,6 @@
 // ------- Imports -------
 
-import { INotebook, INotebookState, INotebookAction, ICreateNotebook } from "./types/notebooks";
+import { INotebook, INotebookState, INotebookAction, ICreateNotebook, IUpdateNotebook } from "./types/notebooks";
 
 
 // ------- Action Types -------
@@ -8,6 +8,7 @@ import { INotebook, INotebookState, INotebookAction, ICreateNotebook } from "./t
 const GET_ALL_NOTEBOOKS = 'notebooks/GET_ALL_NOTEBOOKS';
 const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK';
 const UPDATE_NOTEBOOK = 'notebooks/UPDATE_NOTEBOOK';
+const DELETE_NOTEBOOK = 'notebooks/DELETE_NOTEBOOK';
 
 
 // ------- Action Creators -------
@@ -27,10 +28,15 @@ const updateNotebook = (notebook: INotebook) => ({
     payload: notebook
 })
 
+const deleteNotebook = (notebook: number) => ({
+    type: DELETE_NOTEBOOK,
+    payload: notebook
+})
+
 
 // ------- Thunks -------
 
-export const getAllNotebooksThunk = (notebookId: number): any => async (dispatch: any) => {
+export const getAllNotebooksThunk = (): any => async (dispatch: any) => {
     try {
         const res = await fetch('/api/notebooks');
         if (res.ok) {
@@ -48,7 +54,6 @@ export const getAllNotebooksThunk = (notebookId: number): any => async (dispatch
         return (await err.json());
     }
 };
-
 
 export const createNotebookThunk = (notebook: ICreateNotebook): any => async (dispatch: any) => {
   try {
@@ -70,15 +75,13 @@ export const createNotebookThunk = (notebook: ICreateNotebook): any => async (di
   }
 };
 
-
-export const updateNotebookThunk = (notebookId: number, notebook: INotebook): any => async (dispatch: any) => {
+export const updateNotebookThunk = (notebookId: number, notebook: IUpdateNotebook): any => async (dispatch: any) => {
   try {
     const response = await fetch(`/api/notebooks/${notebookId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(notebook)
     });
-
     if (response.ok) {
       const data: INotebook = await response.json();
       dispatch(updateNotebook(data));
@@ -91,6 +94,22 @@ export const updateNotebookThunk = (notebookId: number, notebook: INotebook): an
   }
 };
 
+export const deleteNotebookThunk = (notebookId: number): any => async (dispatch: any) => {
+  try {
+    const res = await fetch(`/api/notebooks/${notebookId}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      dispatch(deleteNotebook(notebookId));
+    } else {
+      throw res;
+    }
+  } catch (e) {
+    const err = e as Response;
+    return await err.json();
+  }
+};
 
 // ------- Normalizing State -------
 
@@ -105,7 +124,6 @@ const initialState: INotebookState = {
 function notebooksReducer(state = initialState, action: INotebookAction) {
     let newState;
     switch (action.type) {
-
 
         case GET_ALL_NOTEBOOKS:
             const notebooks = action.payload;
@@ -130,8 +148,14 @@ function notebooksReducer(state = initialState, action: INotebookAction) {
             newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
             return newState;
 
+        case DELETE_NOTEBOOK:
+            newState = { ...state };
+            newState.allNotebooks = state.allNotebooks.filter((notebook) => notebook.id !== action.payload);
+            newState.byId = { ...state.byId };
+            delete newState.byId[action.payload];
+            return newState;
 
-
+            
         default:
             return state;
     };
