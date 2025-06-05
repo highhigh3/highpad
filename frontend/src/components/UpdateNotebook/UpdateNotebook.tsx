@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateNotebookThunk } from "../../redux/notebooks";
+import { getAllNotebooksThunk, updateNotebookThunk } from "../../redux/notebooks";
 import { RootState, useAppSelector } from "../../redux/store";
 import "./UpdateNotebook.css";
 
@@ -10,8 +10,14 @@ const UpdateNotebook = () => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const notebook = useAppSelector((state: RootState) => state.notebooks.byId[Number(id)]);
+    // console.log(notebook, "-------->")
     const [title, setTitle] = useState("");
 
+    useEffect(() => {
+        if (!notebook) {
+            dispatch(getAllNotebooksThunk());
+        }
+    }, [dispatch, notebook]);
 
     useEffect(() => {
         if (notebook) {

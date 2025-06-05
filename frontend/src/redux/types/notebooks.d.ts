@@ -24,5 +24,9 @@ export interface INotebookAction {
 }
 
 export interface ICreateNotebook {
-    title: string
+    title: string;
+}
+
+export interface IUpdateNotebook {
+    title: string;
 }
