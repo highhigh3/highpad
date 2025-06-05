@@ -56,4 +56,15 @@ def update_notebook(id):
 @notebook_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_notebook(id):
-    pass
+    notebook = Notebook.query.get(id)
+
+    if not notebook:
+        return {"error": "Notebook not found"}, 404
+
+    if notebook.user_id != current_user.id:
+        return {"error": "Unauthorized"}, 403
+
+    db.session.delete(notebook)
+    db.session.commit()
+
+    return {"message": "Notebook deleted successfully"}, 200

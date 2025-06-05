@@ -1,6 +1,8 @@
 import "./NotebookCard.css";
 import { INotebook } from "../../redux/types/notebooks";
 import { NavLink } from 'react-router-dom';
+import OpenModalButton from "../OpenModalButton";
+import DeleteNotebookModal from "../DeleteNotebookModal/DeleteNotebookModal";
 
 interface NotebookCardProps {
     notebook: INotebook;
@@ -20,6 +22,10 @@ const NotebookCard = ({ notebook }: NotebookCardProps): JSX.Element => {
                 Update Notebook
             </NavLink>
 
+            <OpenModalButton
+                buttonText="Delete Notebook"
+                modalComponent={<DeleteNotebookModal notebookId={notebook.id!} />} onButtonClick={undefined} onModalClose={undefined} 
+            />
         </div>
     );
 };
