@@ -8,10 +8,12 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import notebooksReducer from "./notebooks";
+import notesReducer from "./notes";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   notebooks: notebooksReducer,
+  notes: notesReducer,
 });
 
 

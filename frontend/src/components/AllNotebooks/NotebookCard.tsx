@@ -11,7 +11,9 @@ interface NotebookCardProps {
 const NotebookCard = ({ notebook }: NotebookCardProps): JSX.Element => {
     return (
         <div className="notebook-card">
-            <h2>{notebook.title}</h2>
+            <NavLink to={`/notebooks/${notebook.id}/notes`} className="notebook-link">
+                 <h2>{notebook.title}</h2>
+            </NavLink>
             <p>User ID: {notebook.user_id}</p>
             <p>Notebook ID: {notebook.id}</p>
 

@@ -7,9 +7,11 @@ from app.models import db, Note
 note_routes = Blueprint('notes', __name__)
 
 # Get All Notes Route
-@note_routes.route('/')
-def get_all_notes():
-    pass
+@note_routes.route('/notebooks/<int:notebook_id>/')
+@login_required
+def get_all_notes(notebook_id):
+    notes = Note.query.filter_by(user_id=current_user.id, notebook_id=notebook_id).all()
+    return [note.to_dict() for note in notes], 200
 
 
 # Create a Note Route
