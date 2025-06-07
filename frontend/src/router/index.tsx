@@ -5,6 +5,7 @@ import Layout from './Layout';
 import AllNotebooks from '../components/AllNotebooks';
 import CreateNotebookPage from '../components/CreateNotebookPage';
 import UpdateNotebook from '../components/UpdateNotebook';
+import NotebookNotes from '../components/NotebookNotes';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/notebooks/:id/update",
         element: <UpdateNotebook />,
+      },
+      {
+        path: "/notebooks/:id/notes",
+        element: <NotebookNotes />,
       },
     ],
   },

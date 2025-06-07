@@ -9,6 +9,7 @@ def seed_notes():
     note4 = Note(notebook_id=2, user_id=1, title="Sprint Expectations", content="Complete the requirements. Functionality over looks.")
     note5 = Note(notebook_id=3, user_id=2, title="The Last of Us 2", content="When I have time, the playthrough will be completed.")
     note6 = Note(notebook_id=3, user_id=3, title="Fortnite", content="WE LIKE FORNITE!!!")
+    note7 = Note(notebook_id=1, user_id=1, title="Typescript Cult", content="This was the best decision to join this cult during my time in app academy!")
 
     db.session.add(note1)
     db.session.add(note2)
@@ -16,6 +17,7 @@ def seed_notes():
     db.session.add(note4)
     db.session.add(note5)
     db.session.add(note6)
+    db.session.add(note7)
     db.session.commit()
 
 
