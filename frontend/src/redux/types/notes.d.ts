@@ -8,7 +8,7 @@ export interface INote {
   notebook_id: number;
   user_id?: number;
   title: string;
-  content?: string;
+  content: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -34,4 +34,5 @@ export interface ICreateNote {
 export interface IUpdateNote {
   title: string;
   content?: string;
+  notebook_id: number;
 }
