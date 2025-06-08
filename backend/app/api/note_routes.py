@@ -32,14 +32,25 @@ def create_note(notebook_id):
         db.session.commit()
         return new_note.to_dict(), 201
 
-    return {"errors": form.errors}, 400
+    return form.errors, 400
 
 
-# Update a Note Route
-@note_routes.route('/<int:id>', methods=['PUT'])
+@note_routes.route('/notebooks/<int:notebook_id>/notes/<int:id>/update', methods=['PUT'])
 @login_required
-def update_note(id):
-    pass
+def update_note(notebook_id, id):
+    note = Note.query.get(id)
+
+    form = NoteForm()
+    form.csrf_token.data = request.cookies.get('csrf_token')
+
+    if form.validate_on_submit():
+        note.title = form.title.data
+        note.content = form.content.data
+
+        db.session.commit()
+        return note.to_dict(), 200
+
+    return form.errors, 400
 
 
 # Delete a Note Route
