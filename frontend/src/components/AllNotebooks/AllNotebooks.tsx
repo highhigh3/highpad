@@ -23,17 +23,21 @@ const AllNotebooks = () => {
         }
     }, [dispatch, isLoaded, notebooks]);
 
-    if (isLoaded) {
-return (
+    if (!isLoaded) {
+        return <h1>Loading...</h1>
+    } else {
+
+  return (
     <div className="all-notebooks">
-        <h1>All Notebooks</h1>
-        {notebooks.length > 0 && notebooks.map((notebook, i) => (
-            <div key={`${i}-${notebook.id}`}>
-                <NotebookCard notebook = {notebook} />
-            </div>
+      <h1>All Notebooks</h1>
+      {notebooks.length > 0 &&
+        notebooks.map((notebook, i) => (
+          <div key={`${i}-${notebook.id}`}>
+            <NotebookCard notebook={notebook} />
+          </div>
         ))}
     </div>
-);
+  );
 };
 };
 

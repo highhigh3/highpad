@@ -1,8 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import db, Note
-# import the note form class 
-# from app.forms import 
+from app.forms import NoteForm
 
 note_routes = Blueprint('notes', __name__)
 
@@ -15,10 +14,25 @@ def get_all_notes(notebook_id):
 
 
 # Create a Note Route
-@note_routes.route('/create', methods=['POST'])
+@note_routes.route('/notebooks/<int:notebook_id>/create', methods=['POST'])
 @login_required
-def create_note():
-    pass
+def create_note(notebook_id):
+    form = NoteForm()
+    form.csrf_token.data = request.cookies.get('csrf_token')
+
+    if form.validate_on_submit():
+        new_note = Note(
+            title=form.title.data,
+            content=form.content.data,
+            notebook_id=notebook_id,
+            user_id=current_user.id
+        )
+
+        db.session.add(new_note)
+        db.session.commit()
+        return new_note.to_dict(), 201
+
+    return {"errors": form.errors}, 400
 
 
 # Update a Note Route
