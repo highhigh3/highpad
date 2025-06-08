@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getAllNotesThunk } from '../../redux/notes';
 import { useAppSelector } from '../../redux/store';
@@ -12,6 +12,7 @@ const NotebookNotes = () => {
   const notes = useAppSelector(state => state.notes.allNotes);
 //   console.log(notes, "----->")
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
 
     useEffect(() => {
         const getNotes = async () => {
@@ -26,6 +27,11 @@ const NotebookNotes = () => {
   return (
     <div>
       <h1>Notes for Notebook {id}</h1>
+
+      <button onClick={() => navigate(`/notebooks/${id}/notes/create`)}>
+        Create New Note
+      </button>
+
         {notes.length > 0 && notes.map((note, i) => (
         <div key={`${i}-${note.id}`}>
             <NoteCard note={note} />
