@@ -8,6 +8,7 @@ import { ICreateNote, INote, INoteAction, INoteState, IUpdateNote } from "./type
 const GET_ALL_NOTES = 'notes/GET_ALL_NOTES';
 const CREATE_NOTE = 'notes/CREATE_NOTE';
 const UPDATE_NOTE = 'notes/UPDATE_NOTE';
+const DELETE_NOTE = 'notes/DELETE_NOTE';
 
 // ------- Action Creators -------
 
@@ -23,6 +24,11 @@ const createNote = (note: INote) => ({
 
 const updateNote = (note: INote) => ({
   type: UPDATE_NOTE,
+  payload: note
+});
+
+const deleteNote = (note: number) => ({
+  type: DELETE_NOTE,
   payload: note
 });
 
@@ -85,6 +91,23 @@ export const updateNoteThunk = (notebookId: number, id: number, note: IUpdateNot
   }
 };
 
+export const deleteNoteThunk = (notebookId: number, noteId: number): any => async (dispatch: any) => {
+  try {
+    const res = await fetch(`/api/notes/notebooks/${notebookId}/notes/${noteId}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      dispatch(deleteNote(noteId));
+    } else {
+      throw res;
+    }
+  } catch (e) {
+    const err = e as Response;
+    return await err.json();
+  }
+};
+
 
 // ------- Normalizing State -------
 
@@ -123,6 +146,12 @@ function notesReducer(state = initialState, action: INoteAction): INoteState {
             newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
             return newState;
 
+        case DELETE_NOTE:
+            newState = { ...state };
+            newState.allNotes = state.allNotes.filter(note => note.id !== action.payload);
+            newState.byId = { ...state.byId };
+            delete newState.byId[action.payload];
+            return newState;
 
 
     default:

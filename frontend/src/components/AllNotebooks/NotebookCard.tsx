@@ -26,7 +26,7 @@ const NotebookCard = ({ notebook }: NotebookCardProps): JSX.Element => {
 
             <OpenModalButton
                 buttonText="Delete Notebook"
-                modalComponent={<DeleteNotebookModal notebookId={notebook.id!} />} onButtonClick={undefined} onModalClose={undefined} 
+                modalComponent={<DeleteNotebookModal notebookId={notebook.id} />} onButtonClick={undefined} onModalClose={undefined} 
             />
         </div>
     );
