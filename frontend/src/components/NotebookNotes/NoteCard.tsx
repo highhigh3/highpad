@@ -1,6 +1,8 @@
 import './NoteCard.css';
 import { INote } from '../../redux/types/notes';
 import { useNavigate } from 'react-router-dom';
+import OpenModalButton from '../OpenModalButton';
+import DeleteNoteModal from '../DeleteNoteModal';
 
 interface NoteCardProps {
   note: INote;
@@ -29,6 +31,11 @@ const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       <div className="note-button">
 
         <button onClick={handleUpdateClick}>Update</button>
+
+        <OpenModalButton
+          buttonText="Delete Note"
+          modalComponent={<DeleteNoteModal notebookId={note.notebook_id} noteId={note.id} />} onButtonClick={undefined} onModalClose={undefined} 
+        />  
 
       </div>
     </div>

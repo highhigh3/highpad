@@ -17,15 +17,16 @@ def get_all_notes(notebook_id):
 @note_routes.route('/notebooks/<int:notebook_id>/create', methods=['POST'])
 @login_required
 def create_note(notebook_id):
+
     form = NoteForm()
-    form.csrf_token.data = request.cookies.get('csrf_token')
+    form["csrf_token"].data = request.cookies.get('csrf_token')
 
     if form.validate_on_submit():
         new_note = Note(
-            title=form.title.data,
-            content=form.content.data,
-            notebook_id=notebook_id,
-            user_id=current_user.id
+        title=form.data["title"],
+        content=form.data["content"],
+        notebook_id=notebook_id,
+        user_id=current_user.id
         )
 
         db.session.add(new_note)
@@ -35,18 +36,21 @@ def create_note(notebook_id):
     return form.errors, 400
 
 
+# Update a Note Route
 @note_routes.route('/notebooks/<int:notebook_id>/notes/<int:id>/update', methods=['PUT'])
 @login_required
 def update_note(notebook_id, id):
     note = Note.query.get(id)
 
     form = NoteForm()
-    form.csrf_token.data = request.cookies.get('csrf_token')
+    form["csrf_token"].data = request.cookies.get('csrf_token')
 
     if form.validate_on_submit():
-        note.title = form.title.data
-        note.content = form.content.data
-
+        note.title = form.data["title"]
+        note.content = form.data["content"]
+        notebook_id=notebook_id
+        
+        
         db.session.commit()
         return note.to_dict(), 200
 
@@ -54,7 +58,18 @@ def update_note(notebook_id, id):
 
 
 # Delete a Note Route
-@note_routes.route('/<int:id>', methods=['DELETE'])
+@note_routes.route('/notebooks/<int:notebook_id>/notes/<int:id>', methods=['DELETE'])
 @login_required
-def delete_note(id):
-    pass
+def delete_note(notebook_id, id):
+    note = Note.query.get(id)
+    
+    if not note:
+        return {"error": "Note not found"}, 404
+
+    if note.user_id != current_user.id:
+        return {"error": "Unauthorized"}, 403
+
+    db.session.delete(note)
+    db.session.commit()
+    
+    return {"message": "Note deleted successfully"}, 200
