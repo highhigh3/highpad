@@ -4,7 +4,7 @@
 // ------- General Types -------
 
 export interface INote {
-  id?: number;
+  id: number;
   notebook_id: number;
   user_id?: number;
   title: string;
