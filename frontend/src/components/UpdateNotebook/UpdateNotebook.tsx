@@ -37,7 +37,7 @@ const UpdateNotebook = () => {
 
 
     if (!serverResponse) {
-        navigate("/");
+        navigate("/notebooks");
     }
 };
 

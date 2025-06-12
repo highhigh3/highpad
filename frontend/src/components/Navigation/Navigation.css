@@ -1,3 +1,63 @@
 .profile-dropdown {
   position: absolute;
 }
+
+ul {
+  list-style: none;
+  padding-left: 2rem;
+}
+
+.navigation ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-home {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-home:hover {
+  background-color: #444;
+}
+
+.nav-home2 {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-notebook {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-notebook:hover {
+  background-color: #444;
+}
+
+.nav-notebook2 {
+  width: 20px;
+  height: 20px;
+}
+
+/* .nav-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  background-color: #333333;
+}
+
+.nav-logout2 {
+  width: 20px;
+  height: 20px;
+} */

@@ -18,7 +18,7 @@ const DeleteNotebookModal: React.FC<DeleteNotebookModalProps> = ({ notebookId })
         e.preventDefault();
         await dispatch(deleteNotebookThunk(notebookId));
         closeModal();
-        navigate("/");
+        navigate("/notebooks");
     };
 
     return (
