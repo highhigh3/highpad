@@ -15,24 +15,41 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<any>({});
 
-  if (sessionUser) return <Navigate to="/" replace={true} />;
+  if (sessionUser) return <Navigate to="/home" replace={true} />;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const serverResponse = await dispatch(
       thunkLogin({
-        credential: email,
+        email,
         password,
       })
     );
 
+
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      navigate("/");
+      navigate("/home");
     }
   };
+
+  const demoUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: "demo@aa.io",
+        password: "password",
+      })
+    );
+
+    if (!serverResponse) {
+      navigate("/home");
+    }
+  };
+
 
   return (
     <>
@@ -62,6 +79,9 @@ function LoginFormPage() {
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
       </form>
+
+      <button onClick={demoUser}>Demo User</button>
+
     </>
   );
 }

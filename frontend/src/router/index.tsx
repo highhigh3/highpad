@@ -8,13 +8,14 @@ import UpdateNotebook from '../components/UpdateNotebook';
 import NotebookNotes from '../components/NotebookNotes';
 import CreateNote from '../components/CreateNote';
 import UpdateNote from '../components/UpdateNote';
+import Home from '../components/Home';
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
-        path: "login",
+        path: "/",
         element: <LoginFormPage />,
       },
       {
@@ -22,7 +23,11 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "/",
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        path: "/notebooks",
         element: <AllNotebooks />,
       },
       {
