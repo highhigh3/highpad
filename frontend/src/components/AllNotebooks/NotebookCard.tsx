@@ -11,22 +11,23 @@ interface NotebookCardProps {
 const NotebookCard = ({ notebook }: NotebookCardProps): JSX.Element => {
     return (
         <div className="notebook-card">
-            <NavLink to={`/notebooks/${notebook.id}/notes`} className="notebook-link">
+            <NavLink to={`/notebooks/${notebook.id}/notes`} 
+                     className="notebook-link">
                  <h2>{notebook.title}</h2>
             </NavLink>
-            <p>User ID: {notebook.user_id}</p>
-            <p>Notebook ID: {notebook.id}</p>
 
             <NavLink
                 to={`/notebooks/${notebook.id}/update`}
-                className='update-delete-button'
+                className='update-button'
             >
                 Update Notebook
             </NavLink>
 
             <OpenModalButton
                 buttonText="Delete Notebook"
-                modalComponent={<DeleteNotebookModal notebookId={notebook.id} />} onButtonClick={undefined} onModalClose={undefined} 
+                modalComponent={<DeleteNotebookModal notebookId={notebook.id} />} 
+                onButtonClick={undefined} 
+                onModalClose={undefined} 
             />
         </div>
     );

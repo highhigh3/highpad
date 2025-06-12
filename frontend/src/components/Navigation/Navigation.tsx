@@ -16,17 +16,27 @@ function Navigation(): JSX.Element {
     navigate("/");
   };
 
-  const createNotebook = () => {
-    navigate('/notebooks/create');
-  };
 
   return (
     <nav className="navigation">
       <ul>
+    <li className="nav-user-wrapper">
+      <ProfileButton />
+      <h1 className="nav-hello">Hello, {user?.username}</h1>
+    </li>
 
-        <li>
-          <NavLink to="/">Login</NavLink>
-        </li>
+        {!user && (
+          <li>
+            <NavLink to="/" className="button-login">
+              <img 
+                src="/images/icons8-login-50.png" 
+                className="button-login2" 
+                alt="Home Icon" 
+              />
+            Login
+            </NavLink>
+          </li>
+        )}
 
         <li>
           <NavLink to="/home" className="nav-home">
@@ -52,27 +62,22 @@ function Navigation(): JSX.Element {
           </NavLink>
 
         <li>
-          <button onClick={handleLogout} className="nav-logout">
-            {/* <img 
-              src="/images/icons8-logout-24.png" 
-              alt="Log Out Icon" 
-              className="nav-logout" 
-            /> */}
-            Log Out
-          </button>
+          <NavLink to="/notebooks/create" className="nav-create">
+            <img 
+              src="/images/icons8-notebook-32.png" 
+              className="nav-create1" 
+              alt="Create Notebook Icon" 
+            />
+            Create Notebook
+          </NavLink>
         </li>
 
-            <li>
-              <button onClick={createNotebook}>
-                Create Notebook
-              </button>
-            </li>  
-          </>
-        )}
+        </>
+        )}        
 
-        <li>
+        {/* <li>
           <ProfileButton />
-        </li>
+        </li> */}
 
       </ul>
     </nav>

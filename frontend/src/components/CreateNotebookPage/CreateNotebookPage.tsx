@@ -1,15 +1,33 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createNotebookThunk } from "../../redux/notebooks";
 import "./CreateNotebookPage.css";
 
+interface INotebookErrors {
+  title?: string;
+}
 
 const CreateNotebookPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [title, setTitle] = useState("");
+    const [errors, setErrors] = useState<INotebookErrors>({});
+
+    useEffect(() => {
+        const newErrors: INotebookErrors = {};
+
+        if (!title) {
+        newErrors.title = "Title is required";
+        } else if (title.length < 5) {
+        newErrors.title = "Title must be at least 5 characters";
+        } else if (title.length > 100) {
+        newErrors.title = "Title must be less than 100 characters";
+        }
+
+        setErrors(newErrors);
+    }, [title]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -25,10 +43,10 @@ const CreateNotebookPage = () => {
 
     return (
         <div className="create-notebook-page">
-            <h1>WELCOME TO CREATE A NOTEBOOK PAGE</h1>
+            <h1>CREATE A NOTEBOOK</h1>
             <form onSubmit={handleSubmit}>
                 <label>
-                    Title
+                    Title:
                     <input
                         type="text"
                         value={title}
@@ -36,6 +54,7 @@ const CreateNotebookPage = () => {
                         required
                     />
                 </label>
+                {errors.title && <p className="error-message">{errors.title}</p>}
                 <button type="submit">Create Notebook</button>
             </form>
         </div>

@@ -19,7 +19,7 @@ class Note(db.Model):
         db.ForeignKey(add_prefix_for_prod("users.id")),
         nullable=False)
     title = db.Column(db.String(255), nullable=False)
-    content = db.Column(db.Text, nullable=True)
+    content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     updated_at = db.Column(db.TIMESTAMP, default=datetime.utcnow, 
                            onupdate=datetime.utcnow)
