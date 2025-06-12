@@ -11,8 +11,9 @@ const Home = () => {
     <div className="home-container">
       <div className="home-main">
         <p className="home-main-p">Ready to start taking notes?</p>
-        <h1 className="home-main-h1">Welcome to HighPad {user?.username}</h1>
+        <h1 className="home-main-h1">Welcome to HighPad {user?.username}!</h1>
 
+        {user && (
         <div className="home-buttons">
           <NavLink to="/notebooks" className="home-vnotebook">
             View Notebooks
@@ -23,6 +24,7 @@ const Home = () => {
             Create a New Notebook
           </NavLink>
         </div>
+        )}
       </div>
     </div>
   );

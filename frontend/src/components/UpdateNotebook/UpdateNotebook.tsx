@@ -5,6 +5,10 @@ import { getAllNotebooksThunk, updateNotebookThunk } from "../../redux/notebooks
 import { RootState, useAppSelector } from "../../redux/store";
 import "./UpdateNotebook.css";
 
+interface IUpdateNotebookErrors {
+  title?: string;
+}
+
 const UpdateNotebook = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -12,6 +16,21 @@ const UpdateNotebook = () => {
     const notebook = useAppSelector((state: RootState) => state.notebooks.byId[Number(id)]);
     // console.log(notebook, "-------->")
     const [title, setTitle] = useState("");
+    const [errors, setErrors] = useState<IUpdateNotebookErrors>({});
+
+    useEffect(() => {
+        const newErrors: IUpdateNotebookErrors = {};
+    
+        if (!title) {
+        newErrors.title = "Title is required";
+        } else if (title.length < 5) {
+        newErrors.title = "Title must be at least 5 characters";
+        } else if (title.length > 100) {
+        newErrors.title = "Title must be less than 100 characters";
+        }
+    
+        setErrors(newErrors);
+    }, [title]);
 
     useEffect(() => {
         if (!notebook) {
@@ -54,6 +73,7 @@ const UpdateNotebook = () => {
                         required
                     />
                 </label>
+                {errors.title && <p className="error-message">{errors.title}</p>}
                 <button type="submit">Update Notebook</button>
             </form>
         </div>
