@@ -5,6 +5,11 @@ import { RootState, useAppSelector } from "../../redux/store";
 import { getAllNotesThunk, updateNoteThunk } from "../../redux/notes";
 import "./UpdateNote.css";
 
+interface INoteErrors {
+  title?: string;
+  content?: string;
+}
+
 const UpdateNote = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -16,6 +21,25 @@ const UpdateNote = () => {
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [errors, setErrors] = useState<INoteErrors>({});
+
+    useEffect(() => {
+        const newErrors: INoteErrors = {};
+      
+        if (!title) {
+        newErrors.title = "Title is required";
+        } else if (title.length < 5) {
+        newErrors.title = "Title must be at least 5 characters";
+        } else if (title.length > 100) {
+        newErrors.title = "Title must be less than 100 characters";
+        }
+
+        if (!content) {
+          newErrors.content = "Content is required";
+        } 
+    
+      setErrors(newErrors);
+  }, [title, content]);
 
     useEffect(() => {
       if (!note) {
@@ -62,15 +86,17 @@ const UpdateNote = () => {
             maxLength={255}
           />
         </label>
+        {errors.title && <p className="error-message">{errors.title}</p>}
 
         <label>
-          Content (optional)
+          Content
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             maxLength={1000}
           />
         </label>
+        {errors.content && <p className="error-message">{errors.content}</p>}
 
         <button type="submit">Update Note</button>
       </form>

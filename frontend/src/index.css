@@ -13,8 +13,7 @@ body, html {
 .nav-container-left {
   width: 200px;
   display: flex;
-  height: 100vh;
-  border: 2px solid rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
   background-color: #333333;
   border-radius: 12px;
   padding: 0.5rem;
@@ -24,12 +23,14 @@ body, html {
   flex-grow: 1;
   padding: 2rem;
   background-color: #212121;
-  /* border: 2px solid rgb(255, 0, 0); */
   height: 100vh;
 }
 
 .nav-wrapper {
   display: flex;
-  border-radius: 12px;
-  /* height: 100vh; */
+  /* border-radius: 12px; */
+  height: 100%;
+  width: 100%;
+  background-color: #333333;
+  /* border: 2px solid rgb(255, 255, 255); */
 }

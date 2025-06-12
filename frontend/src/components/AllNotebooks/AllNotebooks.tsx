@@ -9,7 +9,6 @@ import NotebookCard from "./NotebookCard";
 const AllNotebooks = () => {
     const dispatch = useDispatch();
     const notebooks = useAppSelector((state: RootState) => state.notebooks.allNotebooks);
-    // console.log("HERE ---->", notebooks)
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -28,8 +27,8 @@ const AllNotebooks = () => {
     } else {
 
   return (
-    <div className="all-notebooks">
-      <h1>All Notebooks</h1>
+    <div className="all-notebooks-container">
+      <h1>Notebooks</h1>
       {notebooks.length > 0 &&
         notebooks.map((notebook, i) => (
           <div key={`${i}-${notebook.id}`}>
