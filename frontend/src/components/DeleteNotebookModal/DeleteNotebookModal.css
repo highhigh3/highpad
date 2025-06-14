@@ -1,0 +1,49 @@
+.notebook-delete-modal-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  background-color: #333333;
+  border-radius: 12px;
+}
+
+.cdelete-h1 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.delete-detail-desc {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.delete-notebook-button {
+  background-color: #00a82d;
+  color: white;
+  padding: 1.1rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-notebook-button:hover {
+  background-color: #008f26;
+}
+
+.keep-notebook-button {
+  background-color: #ffffff;
+  color: #00a82d;
+  border: 2px solid #00a82d;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.keep-notebook-button:hover {
+  background-color: #e6ffe9;
+}

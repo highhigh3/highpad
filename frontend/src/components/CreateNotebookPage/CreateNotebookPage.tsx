@@ -42,12 +42,13 @@ const CreateNotebookPage = () => {
     };
 
     return (
-        <div className="create-notebook-page">
-            <h1>CREATE A NOTEBOOK</h1>
+        <div className="create-notebook-container">
+            <h1 className="create-header1">CREATE A NOTEBOOK</h1>
             <form onSubmit={handleSubmit}>
-                <label>
+                <label className="create-title-label">
                     Title:
                     <input
+                        className="create-title-input"
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -55,7 +56,9 @@ const CreateNotebookPage = () => {
                     />
                 </label>
                 {errors.title && <p className="error-message">{errors.title}</p>}
-                <button type="submit">Create Notebook</button>
+                <button 
+                className="create-button"
+                type="submit">Create Notebook</button>
             </form>
         </div>
     );

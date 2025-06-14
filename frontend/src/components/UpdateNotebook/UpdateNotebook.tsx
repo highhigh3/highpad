@@ -61,12 +61,13 @@ const UpdateNotebook = () => {
 };
 
     return (
-        <div className="update-notebook-page">
-            <h1>UPDATE NOTEBOOK PAGE</h1>
+        <div className="update-notebook-container">
+            <h1 className="update-header1">UPDATE NOTEBOOK PAGE</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Title
+                <label className="update-title-label">
+                    Title:
                     <input
+                        className="update-title-input"
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -74,7 +75,9 @@ const UpdateNotebook = () => {
                     />
                 </label>
                 {errors.title && <p className="error-message">{errors.title}</p>}
-                <button type="submit">Update Notebook</button>
+                <button 
+                className="submit-button"
+                type="submit">Update Notebook</button>
             </form>
         </div>
     );
