@@ -1,10 +1,4 @@
-.login-h1 {
-  text-align: center;
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-.login-container {
+.signup-form-modal-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 30px 40px;
@@ -12,14 +6,20 @@
   border-radius: 12px;
 }
 
-.email-label {
+.sign-up-header {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.signup-email-label {
   display: block;
   font-weight: 600;
   margin-bottom: 10px;
   color: white;
 }
 
-.email-input {
+.signup-email-input {
   width: 100%;
   padding: 10px 12px;
   margin-bottom: 15px;
@@ -28,14 +28,14 @@
   font-size: 16px;
 }
 
-.password-label {
+.signup-username-label {
   display: block;
   font-weight: 600;
   margin-bottom: 10px;
   color: white;
 }
 
-.password-input {
+.signup-username-input {
   width: 100%;
   padding: 10px 12px;
   margin-bottom: 15px;
@@ -44,7 +44,39 @@
   font-size: 16px;
 }
 
-.modal-submit-button {
+.signup-password-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.signup-password-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.signup-cpassword-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.signup-cpassword-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.modal-signup-button {
   width: 100%;
   padding: 12px;
   background-color: #00a82d;
@@ -57,6 +89,6 @@
   margin-top: 10px;
 }
 
-.modal-submit-button:hover {
+.modal-signup-button:hover {
   background-color: #008f26;
 }

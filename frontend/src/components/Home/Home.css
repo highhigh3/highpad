@@ -61,3 +61,40 @@
 .home-create-button:hover {
   background-color: #e6ffe9;
 }
+
+.home-buttons-logout {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.login-logout {
+  background-color: #00a82d;
+  color: white;
+  padding: 1.1rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.login-logout:hover {
+  background-color: #008f26;
+}
+
+.home-signup-button {
+  background-color: #ffffff;
+  color: #00a82d;
+  border: 2px solid #00a82d;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.home-signup-button:hover {
+  background-color: #e6ffe9;
+}

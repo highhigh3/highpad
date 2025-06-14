@@ -51,6 +51,23 @@ ul {
   height: 20px;
 }
 
+.button-signup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.button-signup:hover {
+  background-color: #444;
+}
+
+.button-signup2 {
+  width: 20px;
+  height: 20px;
+}
+
 .nav-home {
   display: flex;
   align-items: center;
