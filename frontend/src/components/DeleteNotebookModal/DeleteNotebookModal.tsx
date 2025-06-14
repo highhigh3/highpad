@@ -22,9 +22,9 @@ const DeleteNotebookModal: React.FC<DeleteNotebookModalProps> = ({ notebookId })
     };
 
     return (
-        <div className="notebook-delete-modal">
-            <h1>Confirm Delete</h1>
-            <div>Are you sure you want to delete this notebook?</div>
+        <div className="notebook-delete-modal-container">
+            <h1 className="cdelete-h1">Confirm Delete</h1>
+            <div className="delete-detail-desc">Are you sure you want to delete this notebook?</div>
             <button onClick={handleClickDelete} className="delete-notebook-button">
                 Yes (Delete Notebook)
             </button>
