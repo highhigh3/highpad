@@ -36,11 +36,14 @@ function LoginFormModal():JSX.Element {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label>
+      <h1 className="login-h1">Log In</h1>
+      <form 
+      className="login-container"
+      onSubmit={(e) => handleSubmit(e)}>
+        <label className="email-label">
           Email
           <input
+            className="email-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -48,9 +51,10 @@ function LoginFormModal():JSX.Element {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="password-label">
           Password
           <input
+            className="password-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -58,7 +62,9 @@ function LoginFormModal():JSX.Element {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button 
+          className="modal-submit-button"
+          type="submit">Log In</button>
       </form>
     </>
   );

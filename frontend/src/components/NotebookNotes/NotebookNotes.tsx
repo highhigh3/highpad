@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 import { getAllNotesThunk } from '../../redux/notes';
 import { useAppSelector } from '../../redux/store';
 import NoteCard from './NoteCard';
+import "./NotebookNotes.css"
 
 
 const NotebookNotes = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const notes = useAppSelector(state => state.notes.allNotes);
-//   console.log(notes, "----->")
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
 
@@ -25,19 +25,21 @@ const NotebookNotes = () => {
     }, [dispatch, id, isLoaded]);
 
   return (
-    <div>
-      <h1>Notes for Notebook {id}</h1>
+    <div className="notebook-notes-container">
+      <h1>Notes</h1>
 
-      <button onClick={() => navigate(`/notebooks/${id}/notes/create`)}>
+      <button 
+        className='create-note-button'
+        onClick={() => navigate(`/notebooks/${id}/notes/create`)}>
         Create New Note
       </button>
 
+      <div className="note-list">
         {notes.length > 0 && notes.map((note, i) => (
-        <div key={`${i}-${note.id}`}>
-            <NoteCard note={note} />
-        </div>
+          <NoteCard key={`${i}-${note.id}`} note={note} />
         ))}
-        {notes.length === 0 && <p>No notes found.</p>}
+        {notes.length === 0 && <p className="no-notes-message">No notes found.</p>}
+      </div>
     </div>
   );
 };

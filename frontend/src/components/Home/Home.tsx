@@ -13,6 +13,19 @@ const Home = () => {
         <p className="home-main-p">Ready to start taking notes?</p>
         <h1 className="home-main-h1">Welcome to HighPad {user?.username}!</h1>
 
+        {!user && (
+        <div className="home-buttons-logout">
+          <NavLink to="/" className="login-logout">
+            Login
+          </NavLink>
+
+          <NavLink to="/signup" 
+            className="home-signup-button">
+            SignUp
+          </NavLink>
+        </div>
+        )}
+
         {user && (
         <div className="home-buttons">
           <NavLink to="/notebooks" className="home-vnotebook">
