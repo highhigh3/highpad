@@ -30,7 +30,9 @@ const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       </p>
       <div className="note-button">
 
-        <button onClick={handleUpdateClick}>Update</button>
+        <button 
+        className="update-button-note"
+        onClick={handleUpdateClick}>Update</button>
 
         <OpenModalButton
           buttonText="Delete Note"

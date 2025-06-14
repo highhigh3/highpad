@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
-import "./SignupForm.css";
+import "./SignupFormModal.css";
 
 
 
@@ -56,13 +56,14 @@ function SignupFormModal() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="signup-form-modal-container">
+      <h1 className="sign-up-header">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
-        <label>
+        <label className="signup-email-label">
           Email
           <input
+            className="signup-email-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -70,9 +71,10 @@ function SignupFormModal() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="signup-username-label">
           Username
           <input
+            className="signup-username-input"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -80,9 +82,10 @@ function SignupFormModal() {
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className="signup-password-label">
           Password
           <input
+            className="signup-password-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -90,9 +93,10 @@ function SignupFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className="signup-cpassword-label">
           Confirm Password
           <input
+            className="signup-cpassword-input"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -100,9 +104,11 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button 
+        className="modal-signup-button"
+        type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

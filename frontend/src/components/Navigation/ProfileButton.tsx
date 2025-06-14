@@ -41,6 +41,7 @@ function ProfileButton():JSX.Element {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    navigate('/home');
   };
 
   const createNotebook = () => {

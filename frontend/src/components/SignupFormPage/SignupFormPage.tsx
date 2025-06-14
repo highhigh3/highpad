@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
 import { useAppSelector } from "../../redux/store";
+import "./SignupFormPage.css"
 
 
 interface ISignUpErrors {
@@ -57,15 +58,17 @@ function SignupFormPage() {
   };
 
 
-
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="signup-page-container">
+      <h1 className="signup-header">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={(e) => handleSubmit}>
-        <label>
+      <form 
+      className="signup-form"
+      onSubmit={(e) => handleSubmit(e)}>
+        <label className="email-form-label">
           Email
           <input
+            className="email-form-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -73,9 +76,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="username-form-label">
           Username
           <input
+            className="username-form-input"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -83,9 +87,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className="password-form-label">
           Password
           <input
+            className="password-form-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -93,9 +98,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className="cp-form-label">
           Confirm Password
           <input
+            className="cp-form-password-input"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -103,9 +109,11 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button 
+        className="submit-formpage-button"
+        type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
