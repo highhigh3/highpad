@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { thunkSignup } from "../../redux/session";
+import { thunkLogin, thunkSignup } from "../../redux/session";
 import { useAppSelector } from "../../redux/store";
 import "./SignupFormPage.css"
 
@@ -56,6 +56,13 @@ function SignupFormPage() {
       navigate("/");
     }
   };
+
+    const autoFill = () => {
+      setEmail("signup@aa.com");
+      setUsername("SpongeBob");
+      setPassword("password");
+      setConfirmPassword("password");
+    };
 
 
   return (
@@ -112,6 +119,11 @@ function SignupFormPage() {
         <button 
         className="submit-formpage-button"
         type="submit">Sign Up</button>
+
+        <button 
+        className="autofill-button"
+        type="button" onClick={autoFill}>AUTO-FILL</button>
+
       </form>
     </div>
   );

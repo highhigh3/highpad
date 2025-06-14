@@ -32,10 +32,11 @@ const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
 
         <button 
         className="update-button-note"
-        onClick={handleUpdateClick}>Update</button>
+        onClick={handleUpdateClick}>Update Note</button>
 
         <OpenModalButton
           buttonText="Delete Note"
+          className="delete-note-button-modal"
           modalComponent={<DeleteNoteModal notebookId={note.notebook_id} noteId={note.id} />} onButtonClick={undefined} onModalClose={undefined} 
         />  
 

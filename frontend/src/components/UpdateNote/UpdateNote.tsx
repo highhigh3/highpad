@@ -71,13 +71,14 @@ const UpdateNote = () => {
 };
 
   return (
-    <div className="update-note-page">
-      <h1>Update Note</h1>
+    <div className="update-note-container">
+      <h1 className="update-note-header1">Update Note</h1>
 
       <form onSubmit={handleSubmit}>
-        <label>
+        <label className="update-note-title-label">
           Title
           <input
+            className="update-note-title-input"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -88,9 +89,10 @@ const UpdateNote = () => {
         </label>
         {errors.title && <p className="error-message">{errors.title}</p>}
 
-        <label>
+        <label className="update-note-content-label">
           Content
           <textarea
+            className="update-note-content-input"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             maxLength={1000}
@@ -98,7 +100,9 @@ const UpdateNote = () => {
         </label>
         {errors.content && <p className="error-message">{errors.content}</p>}
 
-        <button type="submit">Update Note</button>
+        <button 
+        className="update-submit-button"
+        type="submit">Update Note</button>
       </form>
     </div>
   );

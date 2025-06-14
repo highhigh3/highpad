@@ -93,3 +93,20 @@
 .submit-formpage-button:hover {
   background-color: #008f26;
 }
+
+.autofill-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffffff;
+  color: #008f26;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.autofill-button:hover {
+  background-color: #e6ffe9;
+}

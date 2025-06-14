@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createNoteThunk } from "../../redux/notes";
+import "./CreateNote.css"
 
 interface INoteErrors {
   title?: string;
@@ -52,14 +53,15 @@ const CreateNote = () => {
   };
 
   return (
-    <div className="create-note-page">
-      <h1>WELCOME TO CREATE A NOTE PAGE</h1>
+    <div className="create-note-container">
+      <h1 className="create-note-h1">CREATE A NOTE</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label>
+          <label className="create-note-title-label">
             Title
             <input
+              className="create-note-title-input"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -70,9 +72,10 @@ const CreateNote = () => {
         </div>
 
         <div>
-          <label>
+          <label className="create-note-content-label">
             Content
             <textarea
+              className="create-note-content-input"
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
@@ -80,7 +83,9 @@ const CreateNote = () => {
           {errors.content && <p className="error-message">{errors.content}</p>}
         </div>
 
-        <button type="submit">Create Note</button>
+        <button 
+        className="create-note-page-button"
+        type="submit">Create Note</button>
 
       </form>
     </div>
