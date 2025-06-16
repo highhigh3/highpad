@@ -15,25 +15,41 @@ const CreateNotebookPage = () => {
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState<INotebookErrors>({});
 
+    // useEffect(() => {
+    //     const newErrors: INotebookErrors = {};
+
+    //     if (!title) {
+    //     newErrors.title = "Title is required";
+    //     } else if (title.length < 5) {
+    //     newErrors.title = "Title must be at least 5 characters";
+    //     } else if (title.length > 100) {
+    //     newErrors.title = "Title must be less than 100 characters";
+    //     }
+
+    //     setErrors(newErrors);
+    // }, [title]);
+
     useEffect(() => {
         const newErrors: INotebookErrors = {};
+        const trimmedTitle = title.trim();
 
-        if (!title) {
-        newErrors.title = "Title is required";
-        } else if (title.length < 5) {
-        newErrors.title = "Title must be at least 5 characters";
-        } else if (title.length > 100) {
-        newErrors.title = "Title must be less than 100 characters";
+        if (!trimmedTitle) {
+            newErrors.title = "Title is required";
+        } else if (trimmedTitle.length < 5) {
+            newErrors.title = "Title must be at least 5 characters";
+        } else if (trimmedTitle.length > 100) {
+            newErrors.title = "Title must be less than 100 characters";
         }
 
         setErrors(newErrors);
-    }, [title]);
+        }, [title]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const serverResponse = await dispatch(
-            createNotebookThunk({ title })
+            // createNotebookThunk({ title })
+            createNotebookThunk({ title: title.trim() })
         );
 
         if (!serverResponse) {

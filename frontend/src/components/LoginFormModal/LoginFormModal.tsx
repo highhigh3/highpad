@@ -34,6 +34,23 @@ function LoginFormModal():JSX.Element {
     }
   };
 
+  const demoUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: "demo@aa.io",
+        password: "password",
+      })
+    );
+
+    if (serverResponse.ok) {
+      closeModal();
+    } else {
+      setErrors(serverResponse);
+    }
+  };
+
   return (
     <>
       <h1 className="login-h1">Log In</h1>
@@ -65,6 +82,12 @@ function LoginFormModal():JSX.Element {
         <button 
           className="modal-submit-button"
           type="submit">Log In</button>
+
+        <button onClick={demoUser}
+          className="demo-user-button"
+          >Demo User
+        </button>
+
       </form>
     </>
   );
