@@ -23,23 +23,43 @@ const UpdateNote = () => {
     const [content, setContent] = useState("");
     const [errors, setErrors] = useState<INoteErrors>({});
 
+  //   useEffect(() => {
+  //       const newErrors: INoteErrors = {};
+      
+  //       if (!title) {
+  //       newErrors.title = "Title is required";
+  //       } else if (title.length < 5) {
+  //       newErrors.title = "Title must be at least 5 characters";
+  //       } else if (title.length > 100) {
+  //       newErrors.title = "Title must be less than 100 characters";
+  //       }
+
+  //       if (!content) {
+  //         newErrors.content = "Content is required";
+  //       } 
+    
+  //     setErrors(newErrors);
+  // }, [title, content]);
+
     useEffect(() => {
         const newErrors: INoteErrors = {};
-      
-        if (!title) {
-        newErrors.title = "Title is required";
-        } else if (title.length < 5) {
-        newErrors.title = "Title must be at least 5 characters";
-        } else if (title.length > 100) {
-        newErrors.title = "Title must be less than 100 characters";
+        const trimmedTitle = title.trim();
+        const trimmedContent = content.trim();
+
+        if (!trimmedTitle) {
+          newErrors.title = "Title is required";
+        } else if (trimmedTitle.length < 5) {
+          newErrors.title = "Title must be at least 5 characters";
+        } else if (trimmedTitle.length > 100) {
+          newErrors.title = "Title must be less than 100 characters";
         }
 
-        if (!content) {
+        if (!trimmedContent) {
           newErrors.content = "Content is required";
-        } 
-    
-      setErrors(newErrors);
-  }, [title, content]);
+        }
+
+        setErrors(newErrors);
+      }, [title, content]);
 
     useEffect(() => {
       if (!note) {
@@ -57,10 +77,18 @@ const UpdateNote = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const serverResponse = await dispatch(
+      // const serverResponse = await dispatch(
+      //   updateNoteThunk(Number(notebookId), Number(id), {
+      //     title,
+      //     content,
+      //     notebook_id: Number(notebookId),
+      //   })
+      // );
+
+    const serverResponse = await dispatch(
         updateNoteThunk(Number(notebookId), Number(id), {
-          title,
-          content,
+          title: title.trim(),
+          content: content.trim(),
           notebook_id: Number(notebookId),
         })
       );

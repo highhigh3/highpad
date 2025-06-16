@@ -1,21 +1,21 @@
 import { NavLink } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { useAppSelector } from "../../redux/store";
 import "./Navigation.css";
-// import { useDispatch } from "react-redux";
-// import { thunkLogout } from "../../redux/session";
+import { useDispatch } from "react-redux";
+import { thunkLogout } from "../../redux/session";
 
 function Navigation(): JSX.Element {
   const user = useAppSelector((state) => state.session.user);
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
-  // const handleLogout = async () => {
-  //   await dispatch(thunkLogout());
-  //   navigate("/");
-  // };
+  const handleLogout = async () => {
+    await dispatch(thunkLogout());
+    navigate("/");
+  };
 
 
   return (
@@ -84,6 +84,18 @@ function Navigation(): JSX.Element {
             Create Notebook
           </NavLink>
         </li>
+
+        <li>
+          <div className="logout-button" onClick={handleLogout}>
+            <img 
+              src="/images/icons8-logout-30.png" 
+              className="logout-button1" 
+              alt="Logout Icon" 
+            />
+            Logout
+          </div>
+        </li>
+
 
         </>
         )}        

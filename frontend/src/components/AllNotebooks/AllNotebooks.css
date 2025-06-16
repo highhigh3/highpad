@@ -1,3 +1,15 @@
-/* .all-notebooks-container {
-  border: 2px solid purple;
-} */
+.create-notebook-button {
+  background-color: #00a82d;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.create-notebook-button:hover {
+  background-color: #008f26;
+}
