@@ -118,3 +118,20 @@ ul {
   width: 20px;
   height: 20px;
 }
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logout-button:hover {
+  background-color: #444;
+}
+
+.logout-button1 {
+  width: 20px;
+  height: 20px;
+}

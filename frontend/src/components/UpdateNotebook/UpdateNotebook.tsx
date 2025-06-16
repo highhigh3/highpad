@@ -18,17 +18,32 @@ const UpdateNotebook = () => {
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState<IUpdateNotebookErrors>({});
 
+    // useEffect(() => {
+    //     const newErrors: IUpdateNotebookErrors = {};
+    
+    //     if (!title) {
+    //     newErrors.title = "Title is required";
+    //     } else if (title.length < 5) {
+    //     newErrors.title = "Title must be at least 5 characters";
+    //     } else if (title.length > 100) {
+    //     newErrors.title = "Title must be less than 100 characters";
+    //     }
+    
+    //     setErrors(newErrors);
+    // }, [title]);
+
     useEffect(() => {
         const newErrors: IUpdateNotebookErrors = {};
-    
-        if (!title) {
-        newErrors.title = "Title is required";
-        } else if (title.length < 5) {
-        newErrors.title = "Title must be at least 5 characters";
-        } else if (title.length > 100) {
-        newErrors.title = "Title must be less than 100 characters";
+        const trimmedTitle = title.trim();
+
+        if (!trimmedTitle) {
+            newErrors.title = "Title is required";
+        } else if (trimmedTitle.length < 5) {
+            newErrors.title = "Title must be at least 5 characters";
+        } else if (trimmedTitle.length > 100) {
+            newErrors.title = "Title must be less than 100 characters";
         }
-    
+
         setErrors(newErrors);
     }, [title]);
 
@@ -50,7 +65,8 @@ const UpdateNotebook = () => {
 
     const serverResponse = await dispatch(
         updateNotebookThunk(Number(id), { 
-            title 
+            // title 
+            title: title.trim()
         })
     );
 
