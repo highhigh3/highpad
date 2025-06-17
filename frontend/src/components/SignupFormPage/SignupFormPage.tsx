@@ -35,6 +35,20 @@ function SignupFormPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!email.endsWith(".com")) {
+      return setErrors({
+        email:
+        "Must be a Valid Email Address"
+      });
+    }
+
+    if (username.length < 3) {
+      return setErrors({
+        username:
+        "Username must be at least 3 characters long"
+      });
+    }
+
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
@@ -82,7 +96,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <label className="username-form-label">
           Username
           <input
@@ -93,7 +107,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className="error-message">{errors.username}</p>}
         <label className="password-form-label">
           Password
           <input
@@ -115,7 +129,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
         <button 
         className="submit-formpage-button"
         type="submit">Sign Up</button>

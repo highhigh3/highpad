@@ -33,6 +33,20 @@ function SignupFormModal() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!email.endsWith(".com")) {
+      return setErrors({
+        email:
+        "Must be a Valid Email Address"
+      });
+    }
+
+    if (username.length < 3) {
+      return setErrors({
+        username:
+        "Username must be at least 3 characters long"
+      });
+    }
+
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
@@ -55,6 +69,13 @@ function SignupFormModal() {
     }
   };
 
+      const autoFill = () => {
+      setEmail("signup@aa.com");
+      setUsername("SpongeBob");
+      setPassword("password");
+      setConfirmPassword("password");
+    };
+
   return (
     <div className="signup-form-modal-container">
       <h1 className="sign-up-header">Sign Up</h1>
@@ -70,7 +91,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <label className="signup-username-label">
           Username
           <input
@@ -81,7 +102,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className="error-message">{errors.username}</p>}
         <label className="signup-password-label">
           Password
           <input
@@ -92,7 +113,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <label className="signup-cpassword-label">
           Confirm Password
           <input
@@ -103,10 +124,15 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
         <button 
         className="modal-signup-button"
         type="submit">Sign Up</button>
+
+        <button 
+        className="autofill-button"
+        type="button" onClick={autoFill}>AUTO-FILL</button>
+
       </form>
     </div>
   );
