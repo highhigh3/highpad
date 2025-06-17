@@ -71,7 +71,7 @@ const CreateNotebookPage = () => {
                         required
                     />
                 </label>
-                {errors.title && <p className="error-message">{errors.title}</p>}
+                {title.length > 0 && errors.title && <p className="error-message">{errors.title}</p>}
                 <button 
                 className="create-button"
                 type="submit">Create Notebook</button>

@@ -51,7 +51,12 @@ const CreateNote = () => {
 
       if (!trimmedContent) {
         newErrors.content = "Content is required";
+      } else if (trimmedContent.length < 2) {
+        newErrors.content = "Content must be at least 2 characters";
+      } else if (trimmedContent.length > 1000) {
+        newErrors.content = "Content cannot exceed 1000 characters";
       }
+
 
       setErrors(newErrors);
     }, [title, content]);
@@ -96,7 +101,7 @@ const CreateNote = () => {
               required
             />
           </label>
-          {errors.title && <p className="error-message">{errors.title}</p>}
+          {title.length > 0 && errors.title && <p className="error-message">{errors.title}</p>}
         </div>
 
         <div>
@@ -108,7 +113,7 @@ const CreateNote = () => {
               onChange={(e) => setContent(e.target.value)}
             />
           </label>
-          {errors.content && <p className="error-message">{errors.content}</p>}
+          {content.length > 0 && errors.content && <p className="error-message">{errors.content}</p>}
         </div>
 
         <button 

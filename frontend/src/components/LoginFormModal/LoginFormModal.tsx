@@ -67,7 +67,7 @@ function LoginFormModal():JSX.Element {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <label className="password-label">
           Password
           <input
@@ -78,7 +78,7 @@ function LoginFormModal():JSX.Element {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <button 
           className="modal-submit-button"
           type="submit">Log In</button>

@@ -45,7 +45,7 @@ def upgrade():
         sa.Column('notebook_id', sa.Integer(), nullable=False),
         sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id', ondelete='CASCADE'), nullable=False),
         sa.Column('title', sa.String(length=255), nullable=False),
-        sa.Column('content', sa.Text(), nullable=True),
+        sa.Column('content', sa.Text(), nullable=False),
         sa.Column('created_at', sa.TIMESTAMP(), nullable=False, server_default=sa.func.now()),
         sa.Column('updated_at', sa.TIMESTAMP(), nullable=False, server_default=sa.func.now()),
         sa.ForeignKeyConstraint(['notebook_id'], ['notebooks.id'], ),

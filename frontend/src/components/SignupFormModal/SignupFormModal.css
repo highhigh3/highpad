@@ -92,3 +92,7 @@
 .modal-signup-button:hover {
   background-color: #008f26;
 }
+
+.error-message {
+  color: red;
+}
