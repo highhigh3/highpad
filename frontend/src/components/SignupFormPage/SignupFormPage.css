@@ -110,3 +110,7 @@
 .autofill-button:hover {
   background-color: #e6ffe9;
 }
+
+.error-message {
+    color: red;
+}
