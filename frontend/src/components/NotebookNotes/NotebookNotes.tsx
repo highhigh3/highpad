@@ -24,6 +24,10 @@ const NotebookNotes = () => {
         }
     }, [dispatch, id, isLoaded]);
 
+    if (!isLoaded) {
+        return <h1>Loading...</h1>
+    } else {
+
   return (
     <div className="notebook-notes-container">
       <h1>Notes</h1>
@@ -38,10 +42,11 @@ const NotebookNotes = () => {
         {notes.length > 0 && notes.map((note, i) => (
           <NoteCard key={`${i}-${note.id}`} note={note} />
         ))}
-        {notes.length === 0 && <p className="no-notes-message">No notes found.</p>}
+        {notes.length === 0 && <p className="no-notes-message">There are currently no notes.</p>}
       </div>
     </div>
   );
+};
 };
 
 export default NotebookNotes;

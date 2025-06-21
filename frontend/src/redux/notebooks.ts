@@ -142,11 +142,22 @@ function notebooksReducer(state = initialState, action: INotebookAction) {
             newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
             return newState;
 
+        // case UPDATE_NOTEBOOK:
+        //     newState = { ...state };
+        //     newState.allNotebooks = [...newState.allNotebooks, action.payload];
+        //     newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
+        //     return newState;
         case UPDATE_NOTEBOOK:
             newState = { ...state };
-            newState.allNotebooks = [...newState.allNotebooks, action.payload];
-            newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
-            return newState;
+            newState.allNotebooks = state.allNotebooks.map(notebook => {
+              if (notebook.id === action.payload.id) {
+                return action.payload;
+              }
+                return notebook;
+            });
+            newState.byId = {...state.byId, [action.payload.id]: action.payload};
+
+  return newState;
 
         case DELETE_NOTEBOOK:
             newState = { ...state };
