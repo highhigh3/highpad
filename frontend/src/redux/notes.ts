@@ -140,10 +140,20 @@ function notesReducer(state = initialState, action: INoteAction): INoteState {
             newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
             return newState;
 
+        // case UPDATE_NOTE:
+        //     newState = { ...state };
+        //     newState.allNotes = [...newState.allNotes, action.payload];
+        //     newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
+        //     return newState;
         case UPDATE_NOTE:
             newState = { ...state };
-            newState.allNotes = [...newState.allNotes, action.payload];
-            newState.byId = { ...newState.byId, [action.payload.id]: action.payload };
+            newState.allNotes = state.allNotes.map(note => {
+              if (note.id === action.payload.id) {
+                return action.payload;
+              }
+                return note;
+            });
+            newState.byId = {...state.byId, [action.payload.id]: action.payload};
             return newState;
 
         case DELETE_NOTE:

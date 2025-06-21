@@ -54,10 +54,14 @@ const UpdateNote = () => {
           newErrors.title = "Title must be less than 100 characters";
         }
 
-        if (!trimmedContent) {
-          newErrors.content = "Content is required";
-        }
-
+      if (!trimmedContent) {
+        newErrors.content = "Content is required";
+      } else if (trimmedContent.length < 2) {
+        newErrors.content = "Content must be at least 2 characters";
+      } else if (trimmedContent.length > 1000) {
+        newErrors.content = "Content cannot exceed 1000 characters";
+      }
+      
         setErrors(newErrors);
       }, [title, content]);
 
